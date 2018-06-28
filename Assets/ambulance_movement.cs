@@ -13,19 +13,19 @@ public class ambulance_movement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-        if (Input.GetKey("w"))
+        if (Input.GetKey("a"))
         {
             ambulance.AddForce(-2000 * Time.deltaTime, 0,0);
         }
-        if(Input.GetKey("a"))
+        if(Input.GetKey("s"))
         {
           ambulance.AddForce(0,0, -2000 * Time.deltaTime);
         }
-        if (Input.GetKey("d"))
+        if (Input.GetKey("w"))
         {
             ambulance.AddForce(0,0, 2000 * Time.deltaTime);
         }
-        if (Input.GetKey("s"))
+        if (Input.GetKey("d"))
         {
             ambulance.AddForce(2000 * Time.deltaTime, 0, 0);
         }
