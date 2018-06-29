@@ -5,13 +5,11 @@ using UnityEngine;
 
 public class AmbulanceCollision : MonoBehaviour {
     public Text HitCount;
-    public Text InfectedCount;
     private int numSaved;
 
     void Start(){
         numSaved = 0;
         setHit();
-        setAlive();
     }
 
 	private void OnCollisionEnter(Collision coll)
@@ -23,16 +21,10 @@ public class AmbulanceCollision : MonoBehaviour {
             numSaved++;
             setHit();
             collidedObj.SetActive(false);
-            setAlive();
         }
 	}
 
     private void setHit(){
         HitCount.text = "Saved: " + numSaved;
-    }
-
-    private void setAlive(){
-        int totalInfected = GameObject.FindGameObjectsWithTag("zombie").Length;
-        InfectedCount.text = "Infected: " + totalInfected;
     }
 }

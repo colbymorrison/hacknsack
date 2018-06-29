@@ -23,19 +23,19 @@ public class ethan_moves : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isWandering == false)
+        if (!isWandering)
         {
             StartCoroutine(Wander());
         }
-        if (isRotatingR == true)
+        if (isRotatingR)
         {
             transform.Rotate(transform.up * Time.deltaTime * rotSpeed);
         }
-        if (isRotatingL == true)
+        if (isRotatingL)
         {
             transform.Rotate(transform.up * Time.deltaTime * -rotSpeed);
         }
-        if (isWalking == true)
+        if (isWalking)
         {
             transform.position += transform.forward * moveSpeed * Time.deltaTime;
         }

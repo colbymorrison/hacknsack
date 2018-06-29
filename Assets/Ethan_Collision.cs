@@ -1,16 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Ethan_Collision : MonoBehaviour {
+public class Ethan_Collision : MonoBehaviour
+{
+    public Text InfectedCount;
 
-	// Use this for initialization
-	void Start () {
-		
+	private void Start()
+	{
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+	private void Update()
+	{
+        int totalInfected = GameObject.FindGameObjectsWithTag("zombie").Length;
+        InfectedCount.text = "Infected: " + totalInfected;
 	}
+
+	private void OnCollisionEnter(Collision coll)
+    {
+        GameObject collidedObj = coll.gameObject;
+
+        if (gameObject.CompareTag("zombie") || collidedObj.CompareTag("zombie")){
+            SpawnObject.zombify(gameObject);
+            SpawnObject.zombify(collidedObj);
+        }
+    }
 }
