@@ -12,6 +12,7 @@ public class SpawnObject : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        SpawnZombie();
         InvokeRepeating("SpawnFood", 2.0f, 1.0f);
     }
 
@@ -19,10 +20,15 @@ public class SpawnObject : MonoBehaviour
         Debug.Log("Spawning");
     }
 
-    public void SpawnFood()
+    private void SpawnZombie(){
+        GameObject game_obj = SpawnFood();
+        game_obj.tag = "zombie";
+    }
+
+    public GameObject SpawnFood()
     {
         Vector3 pos = center + new Vector3(Random.Range(-size.x / 2, size.x / 2), Random.Range(-size.y / 2, size.y / 2), Random.Range(-size.z / 2, size.z / 2));
-        Instantiate(Personprefab, pos, Quaternion.identity);
+        return Instantiate(Personprefab, pos, Quaternion.identity);
     }
 
     void OnDrawGizmosSelected()
