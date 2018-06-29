@@ -4,22 +4,35 @@ using UnityEngine.UI;
 using UnityEngine;
 
 public class AmbulanceCollision : MonoBehaviour {
-    private int count;
-    private ambulance_movement ambulance;
+    public Text HitCount;
+    public Text InfectedCount;
+    private int numSaved;
 
     void Start(){
-        GameObject ambulance_object = GameObject.Find("Ambulance");
-        this.ambulance = ambulance_object.GetComponent<ambulance_movement>();
+        numSaved = 0;
+        setHit();
+        setAlive();
     }
 
 	private void OnCollisionEnter(Collision coll)
 	{
-        GameObject gameObj = coll.gameObject;
+        GameObject collidedObj = coll.gameObject;
 
-        if(gameObj.tag == "zombie"){
-            count++;
-            ambulance.setHitCount(count);
-            Destroy(gameObj);
+        //If we hit a zombie increment the count and delete the zombie
+        if(collidedObj.tag == "zombie"){
+            numSaved++;
+            setHit();
+            collidedObj.SetActive(false);
+            setAlive();
         }
 	}
+
+    private void setHit(){
+        HitCount.text = "Saved: " + numSaved;
+    }
+
+    private void setAlive(){
+        int totalInfected = GameObject.FindGameObjectsWithTag("zombie").Length;
+        InfectedCount.text = "Infected: " + totalInfected;
+    }
 }
